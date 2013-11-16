@@ -7,7 +7,13 @@ class UrlMappings {
 			}
 		}
 
-		"/"(view:"/index")
+		"/" {
+            controller = 'dashboard'
+            action = 'list'
+        }
+
+        //"/" (controller: 'bank')
+        //view:"/index")
 		"500"(view:'/error')
 	}
 }

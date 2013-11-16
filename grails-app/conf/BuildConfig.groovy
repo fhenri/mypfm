@@ -1,7 +1,10 @@
 grails.servlet.version = "2.5" // Change depending on target container compliance (2.5 or 3.0)
+/*
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
+*/
+grails.project.work.dir = "target"
 grails.project.target.level = 1.6
 grails.project.source.level = 1.6
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
@@ -43,6 +46,8 @@ grails.project.dependency.resolution = {
 
         // runtime 'mysql:mysql-connector-java:5.1.22'
         compile 'org.joda:joda-money:0.9'
+        compile 'net.sf.ofx4j:ofx4j:1.6'
+        compile 'be.cyberelf.nanoxml:nanoxml:2.2.3'
     }
 
     plugins {

@@ -1,8 +1,5 @@
-
-import org.mypfm.user.ShiroUser
-import org.mypfm.user.ShiroRole
-
-import org.apache.shiro.crypto.hash.Sha256Hash
+import org.apache.shiro.crypto.hash.Sha512Hash
+import org.mypfm.user.*
 
 class BootStrap {
 
@@ -17,8 +14,8 @@ class BootStrap {
         }
         def admin = ShiroUser.findByUsername('admin')
         if(!admin){
-            def hash = new Sha256Hash("changeit").toHex()
-            admin = new ShiroUser(firstName:"Administator",lastName:"User",
+            def hash = new Sha512Hash("changeit").toHex()
+            admin = new ShiroUser(firstName:"Administator", lastName:"User",
                     username: 'admin', email:"me@the.internet")
             admin.passwordHash = hash
             admin.save(failOnError:true)
