@@ -3,11 +3,13 @@ package org.mypfm.user
 import org.apache.shiro.SecurityUtils
 import org.apache.shiro.authc.AuthenticationException
 import org.apache.shiro.authc.UsernamePasswordToken
+import org.apache.shiro.crypto.hash.Sha512Hash
 import org.apache.shiro.web.util.WebUtils
+
 import java.security.SecureRandom
-import org.apache.shiro.crypto.hash.Sha256Hash
 
 class AuthController {
+
     def shiroSecurityManager
 
     def mailService
@@ -105,7 +107,7 @@ class AuthController {
 			def connectedUser = SecurityUtils.subject?.principal
 			def user = resetRequest?.user ?: (connectedUser ? ShiroUser.findByUsername(connectedUser) : null)
 			if (user) {
-				user.passwordHash = new Sha256Hash(params.password1).toHex()
+				user.passwordHash = new Sha512Hash(params.password1).toHex()
 				user.passwordChangeRequiredOnNextLogon = false
 				if (user.save()){
 					resetRequest?.delete()
@@ -128,8 +130,8 @@ class AuthController {
 		} else {
 			def user = ShiroUser.findByUsername(SecurityUtils.subject?.principal)
 			if (user) {
-				if (user.passwordHash == new Sha256Hash(params.oldpassword).toHex()){
-					user.passwordHash = new Sha256Hash(params.password1).toHex()
+				if (user.passwordHash == new Sha512Hash(params.oldpassword).toHex()){
+					user.passwordHash = new Sha512Hash(params.password1).toHex()
 					if (user.save()){
 						flash.message = "Password successfully updated"
 						redirect(uri:'/')

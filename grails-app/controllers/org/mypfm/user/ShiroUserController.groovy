@@ -1,6 +1,6 @@
 package org.mypfm.user
 
-import org.apache.shiro.crypto.hash.Sha256Hash
+import org.apache.shiro.crypto.hash.Sha512Hash
 import org.springframework.dao.DataIntegrityViolationException
 import java.security.SecureRandom
 
@@ -28,7 +28,7 @@ class ShiroUserController {
         def shiroUserInstance = new ShiroUser(params)
 		def password = ""
 		if (!shiroUserInstance.passwordHash) {password = new BigInteger(130, new SecureRandom()).toString(32)
-			shiroUserInstance.passwordHash = new Sha256Hash(password).toHex()
+			shiroUserInstance.passwordHash = new Sha512Hash(password).toHex()
 		}
 		shiroUserInstance.passwordChangeRequiredOnNextLogon = true
         if (!shiroUserInstance.save(flush: true)) {

@@ -16,8 +16,7 @@
                 <h2>Login to your account</h2>
 
                 <g:if test="${flash.message}">
-                    <div class="message" role="status">${flash.message}</div>
-                    <br/>
+                    <div class="alert" role="status">${flash.message}</div>
                 </g:if>
 
                 <g:form action="signIn" class="form-horizontal">

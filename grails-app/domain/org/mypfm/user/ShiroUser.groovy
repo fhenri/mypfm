@@ -7,6 +7,7 @@ class ShiroUser {
     String username
     String passwordHash
     String email
+
     Date dateCreated
     Date lastUpdated
 
