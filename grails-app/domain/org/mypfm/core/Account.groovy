@@ -33,7 +33,7 @@ class Account {
      
     String accountId
     String type
-    String label
+    String label = ""
 
     Date opendate
     Currency currency
@@ -63,7 +63,7 @@ class Account {
 
     @Override
     String toString() {
-        label
+        "$accountId $label"
     }
 
 }
