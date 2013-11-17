@@ -59,44 +59,45 @@
                     </thead>
                     <tbody>
                         <g:each in="${transactionList}" var="transaction">
-                                <tr>
-                                    <td>
-                                        ${transaction.account}
-                                    </td>
-                                    <td>
-                                        ${transaction.label}
-                                    </td>
-                                    <td>
-                                        ${transaction.date.format('dd/MM/yyyy')}
-                                    </td>
-                                    <td>
-                                        ${transaction.amount.getAmount()}
-                                    </td>
-                                    <td>
-                                        ${transaction?.category?.name}
-                                    </td>
-                                    <td>
-                                        ${transaction?.comment}
-                                    </td>
-                                    <td>
+                            <tr>
+                                <td>
+                                    ${transaction.account}
+                                </td>
+                                <td>
+                                    ${transaction.label}
+                                </td>
+                                <td>
+                                    ${transaction.date.format('dd/MM/yyyy')}
+                                </td>
+                                <td>
+                                    ${transaction.amount?.getAmount()}
+                                </td>
+                                <td>
+                                    ${transaction?.category?.name}
+                                </td>
+                                <td>
+                                    ${transaction?.comment}
+                                </td>
+                                <td>
 
-%{--
-                                        <a href="#" id="${transaction?.id}" class="btn btn-mini btn-info btn-transactionCategory">
-                                            <i class="halflings-icon edit halflings-icon"></i>
-                                        </a>
+                                    <a href="#" id="${transaction?.id}" class="btn btn-mini btn-info btn-transactionCategory">
+                                        <i class="halflings-icon edit halflings-icon"></i>
+                                    </a>
+                                %{--
 
-                                        <a href="javascript:{}" onclick="document.getElementByName('updateTransaction_${transaction.id}').submit();" class="btn btn-mini btn-info">
-                                            <i class="halflings-icon edit halflings-icon"></i>
-                                        </a>
-                                <g:hiddenField name="id" value="${transaction?.id}"/>
-                                <g:hiddenField name="version" value="${transaction?.version}"/>
-                                        <g:actionSubmit class="btn btn-mini btn-info" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
---}%
-                                        <g:link action="show" id="${transaction.id}" class="btn btn-mini btn-info">
-                                            <i class="halflings-icon edit halflings-icon"></i>
-                                        </g:link>
-                                    </td>
-                                </tr>
+                                    <a href="javascript:{}" onclick="document.getElementByName('updateTransaction_${transaction.id}').submit();" class="btn btn-mini btn-info">
+                                        <i class="halflings-icon edit halflings-icon"></i>
+                                    </a>
+                                    <g:hiddenField name="id" value="${transaction?.id}"/>
+                                    <g:hiddenField name="version" value="${transaction?.version}"/>
+                                    <g:actionSubmit class="btn btn-mini btn-info" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+
+                                    <g:link action="show" id="${transaction.id}" class="btn btn-mini btn-info">
+                                        <i class="halflings-icon edit halflings-icon"></i>
+                                    </g:link>
+                                --}%
+                                </td>
+                            </tr>
                         </g:each>
                     </tbody>
                 </table>

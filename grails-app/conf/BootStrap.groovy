@@ -1,5 +1,7 @@
 import org.apache.shiro.crypto.hash.Sha512Hash
-import org.mypfm.user.*
+import org.mypfm.core.Category
+import org.mypfm.user.ShiroUser
+import org.mypfm.user.ShiroRole
 
 class BootStrap {
 
@@ -23,6 +25,19 @@ class BootStrap {
             adminRole.save(failOnError:true)
             admin.addToPermissions("*:*")
         }
+
+        // create the category
+        def santeCategory = new Category(name: "santé").save()
+        def medecinCategory = new Category(name:  "médecin", parent: santeCategory).save()
+        def pharmacieCategory = new Category(name:  "pharmacie", parent: santeCategory).save()
+        def secuCategory = new Category(name:  "sécurité sociale", parent: santeCategory).save()
+        def mutuelleCategory = new Category(name:  "mutuelle", parent: santeCategory).save()
+        santeCategory
+                .addToChilds(medecinCategory)
+                .addToChilds(pharmacieCategory)
+                .addToChilds(secuCategory)
+                .addToChilds(mutuelleCategory)
+
     }
     def destroy = {
     }

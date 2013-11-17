@@ -11,11 +11,11 @@ class Transaction {
     Money amount;
     //String amount
     //String parent;
-    //Category category
+    Category category
     String comment
 
     static belongsTo = [account: Account]
-    static hasMany = [category: Category]
+    //static hasMany = [category: Category]
 
     static constraints = {
         transactionId(blank: false, unique: true)
