@@ -180,4 +180,72 @@ class AuthController {
 		}
 		redirect(uri:'/')
     }
+
+    def signup() {
+        ShiroUser user = new ShiroUser()
+        [user: user]
+    }
+
+    def register() {
+
+        // Check to see if the username already exists
+        def user = ShiroUser.findByUsername(params.username)
+        if (user) {
+            flash.message = "User already exists with the username '${params.username}'"
+            redirect(action:'signup')
+        }
+
+        // User doesn't exist with username. Let's create one
+        else {
+
+            // Make sure the passwords match
+            if (params.password != params.password2) {
+                flash.message = "Passwords do not match"
+                redirect(action:'signup')
+            }
+
+            // Passwords match. Let's attempt to save the user
+            else {
+                // Create user
+                user = new ShiroUser(
+                        username: params.username,
+                        email: params.email,
+                        firstName: params.firstname,
+                        lastName: params.lastname,
+                        passwordHash: new Sha512Hash(params.password).toHex()
+                )
+
+                if (user.save()) {
+
+                    // Add USER role to new user
+                    def userRole = ShiroRole.findByName('User')
+                    user.addToRoles(userRole)
+                    user.addToPermissions("*:*")
+                    user.save()
+
+                    // Login user
+                    def authToken = new UsernamePasswordToken(user.username, params.password)
+                    SecurityUtils.subject.login(authToken)
+
+                    // If a controller redirected to this page, redirect back
+                    // to it. Otherwise redirect to the root URI.
+                    def targetUri = params.targetUri ?: "/"
+
+                    // Handle requests saved by Shiro filters.
+                    def savedRequest = WebUtils.getSavedRequest(request)
+                    if (savedRequest) {
+                        targetUri = savedRequest.requestURI - request.contextPath
+                        if (savedRequest.queryString) targetUri = targetUri + '?' + savedRequest.queryString
+                    }
+                    log.info "Redirecting to '${targetUri}'."
+                    redirect(uri: targetUri)
+                }
+                else {
+                    //user.errors.allErrors.each {println it.defaultMessage; msg +=it.defaultMessage}
+                    flash.message = "Cannot create your account"
+                    redirect(action:'signup')
+                }
+            }
+        }
+    }
 }

@@ -65,7 +65,7 @@
                         <ul class="dropdown-menu">
                             <shiro:hasRole name="Administrator">
                                 <li><g:link uri="/shiroUser/list"><i class="halflings-icon white wrench"></i> Manage User</g:link></li>
-                                </shiro:hasRole>
+                            </shiro:hasRole>
                                 <li><g:link uri="/auth/signOut"><i class="halflings-icon white off"></i>Logout</g:link></li>
                             </ul>
                         </li>
