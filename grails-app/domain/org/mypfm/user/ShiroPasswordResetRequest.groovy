@@ -2,6 +2,10 @@ package org.mypfm.user
 
 import java.security.SecureRandom
 
+/**
+ *
+ * @author fhenri
+ */
 class ShiroPasswordResetRequest {
 
 	ShiroUser user

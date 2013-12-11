@@ -2,6 +2,10 @@ package org.mypfm.user
 
 import org.springframework.dao.DataIntegrityViolationException
 
+/**
+ *
+ * @author fhenri
+ */
 class ShiroRoleController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]

@@ -1,12 +1,15 @@
 package org.mypfm.core
-
-import net.sf.ofx4j.io.OFXHandler;
-import net.sf.ofx4j.io.OFXSyntaxException;
+import net.sf.ofx4j.io.OFXHandler
+import net.sf.ofx4j.io.OFXSyntaxException
 import net.sf.ofx4j.io.nanoxml.NanoXMLOFXReader
+import org.joda.money.Money
+
 import java.text.SimpleDateFormat
-import org.joda.money.Money;
 
-
+/**
+ *
+ * @author fhenri
+ */
 class TransactionService {
 
     /**
@@ -14,7 +17,7 @@ class TransactionService {
      * @param file
      * @return
      */
-    def importOFXStatement(uploadFile) {
+    def importOFXStatement(uploadFile, realmId) {
 
         // backup file so we can treat it
         def saveFile = new java.io.File("/tmp/${uploadFile.originalFilename}")
@@ -83,12 +86,12 @@ class TransactionService {
                 switch (aggregateName) {
                     case "STMTRS" :
                         isInAccount = true
-                        accountInstance = new Account()
+                        accountInstance = new Account(realmId: realmId)
                         existingAccount = false
                         break
                     case "STMTTRN" :
                         isInTransaction = true
-                        transactionInstance = new Transaction()
+                        transactionInstance = new Transaction(realmId: realmId)
                         transactionInstance.account = accountInstance
                         break
                     case "LEDGERBAL" :
@@ -120,6 +123,4 @@ class TransactionService {
 
         countTransaction
     }
-
-
 }

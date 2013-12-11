@@ -10,9 +10,11 @@ import org.joda.money.Money
  * General definition of account.
  *
  * @author fhenri
- *
  */
 class Account {
+
+    // field to manage multi tenant
+    String realmId
 
     /* example of an account from the bank report :
      * [Depot

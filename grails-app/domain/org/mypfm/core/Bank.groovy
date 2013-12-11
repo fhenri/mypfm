@@ -1,6 +1,14 @@
 package org.mypfm.core
 
+/**
+ * represents a bank - a bank is unique by the iban code
+ *
+ * @author fhenri
+ */
 class Bank {
+
+    // field to manage multi tenant
+    String realmId
 
     String iBanCode
     String bankName

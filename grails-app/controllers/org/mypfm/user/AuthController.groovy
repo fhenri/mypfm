@@ -8,6 +8,12 @@ import org.apache.shiro.web.util.WebUtils
 
 import java.security.SecureRandom
 
+import static java.util.UUID.randomUUID
+
+/**
+ *
+ * @author fhenri
+ */
 class AuthController {
 
     def shiroSecurityManager
@@ -212,7 +218,8 @@ class AuthController {
                         email: params.email,
                         firstName: params.firstname,
                         lastName: params.lastname,
-                        passwordHash: new Sha512Hash(params.password).toHex()
+                        passwordHash: new Sha512Hash(params.password).toHex(),
+                        realmId: randomUUID() as String
                 )
 
                 if (user.save()) {

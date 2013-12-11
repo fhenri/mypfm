@@ -1,8 +1,13 @@
 package org.mypfm.user
 
+/**
+ *
+ * @author fhenri
+ */
 class ShiroRole {
     String name
     String description
+
     Date dateCreated
     Date lastUpdated
 

@@ -3,6 +3,8 @@ import org.mypfm.core.Category
 import org.mypfm.user.ShiroUser
 import org.mypfm.user.ShiroRole
 
+import static java.util.UUID.randomUUID
+
 class BootStrap {
 
     def shiroSecurityService
@@ -14,11 +16,17 @@ class BootStrap {
             adminRole = new ShiroRole(name: 'Administrator')
             adminRole.save(failOnError:true)
         }
+        def userRole = ShiroRole.findByName("User")
+        if(!userRole){
+            userRole = new ShiroRole(name: 'User')
+            userRole.save(failOnError:true)
+        }
         def admin = ShiroUser.findByUsername('admin')
         if(!admin){
             def hash = new Sha512Hash("changeit").toHex()
             admin = new ShiroUser(firstName:"Administator", lastName:"User",
                     username: 'admin', email:"me@the.internet")
+            admin.realmId = randomUUID() as String
             admin.passwordHash = hash
             admin.save(failOnError:true)
             adminRole.addToUsers(admin)
@@ -28,10 +36,11 @@ class BootStrap {
 
         // create the category
         def santeCategory = new Category(name: "santé").save()
-        def medecinCategory = new Category(name:  "médecin", parent: santeCategory).save()
+        def medecinCategory = new Category(name: "medecin").save()
         def pharmacieCategory = new Category(name:  "pharmacie", parent: santeCategory).save()
         def secuCategory = new Category(name:  "sécurité sociale", parent: santeCategory).save()
         def mutuelleCategory = new Category(name:  "mutuelle", parent: santeCategory).save()
+
         santeCategory
                 .addToChilds(medecinCategory)
                 .addToChilds(pharmacieCategory)
@@ -39,6 +48,7 @@ class BootStrap {
                 .addToChilds(mutuelleCategory)
 
     }
+
     def destroy = {
     }
 }

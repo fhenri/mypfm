@@ -1,6 +1,13 @@
 package org.mypfm.user
 
+/**
+ *
+ * @author fhenri
+ */
 class ShiroUser {
+
+    // field to manage multi tenant
+    String realmId
 
     String firstName
     String lastName
@@ -18,7 +25,7 @@ class ShiroUser {
     static constraints = {
         firstName(blank: false)
         lastName(blank: false)
-        username(unique: true, blank: false, size: 5..20)
+        username(unique: true, blank: false, size: 4..20)
         email(unique: true, email: true)
         passwordHash(display:false)
         passwordChangeRequiredOnNextLogon(nullable: true)

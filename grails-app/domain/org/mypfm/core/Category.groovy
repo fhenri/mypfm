@@ -14,10 +14,9 @@ class Category {
     @Override
     String toString() {
         if (this.parent == null) {
-            name
+            this.name
         } else {
-            "----" + name
+            "----" + this.name
         }
     }
-
 }

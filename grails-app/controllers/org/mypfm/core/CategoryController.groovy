@@ -1,10 +1,12 @@
 package org.mypfm.core
 
+/**
+ *
+ * @author fhenri
+ */
 class CategoryController {
 
-    def index() {
-        redirect(action: "list", params: params)
-    }
+    static defaultAction = 'list'
 
     def list(Integer max) {
         //params.max = Math.min(max ?: 30, 100)

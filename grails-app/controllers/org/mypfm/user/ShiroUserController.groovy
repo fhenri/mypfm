@@ -4,6 +4,10 @@ import org.apache.shiro.crypto.hash.Sha512Hash
 import org.springframework.dao.DataIntegrityViolationException
 import java.security.SecureRandom
 
+/**
+ *
+ * @author fhenri
+ */
 class ShiroUserController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]

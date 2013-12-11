@@ -1,7 +1,13 @@
 package org.mypfm.core
 
+import org.apache.shiro.SecurityUtils
+import org.mypfm.user.ShiroUser
 import org.springframework.dao.DataIntegrityViolationException
 
+/**
+ *
+ * @author fhenri
+ */
 class DashboardController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -9,8 +15,13 @@ class DashboardController {
     static defaultAction = 'list'
 
     def list(Integer max) {
+        def realmId = ShiroUser.findByUsername( SecurityUtils.subject.principal ).realmId
+        def query = {
+            like("realmId", realmId)
+        }
         //params.max = Math.min(max ?: 10, 100)
-        [bankInstanceList: Bank.list(params), bankInstanceTotal: Bank.count(), accountInstanceList: Account.list(params), accountInstanceTotal: Account.count()]
+        [bankInstanceList: Bank.createCriteria().list(query), bankInstanceTotal: Bank.createCriteria().count(query),
+         accountInstanceList: Account.createCriteria().list(query), accountInstanceTotal: Account.createCriteria().count(query)]
     }
 
     def createBank() {

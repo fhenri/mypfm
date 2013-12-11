@@ -76,7 +76,7 @@
                                     ${transaction?.category?.name}
                                 </td>
                                 <td>
-                                    ${transaction?.comment}
+                                    <g:textArea cols="12" rows="1" name="comment" value="${transaction?.comment}"/>
                                 </td>
                                 <td>
 

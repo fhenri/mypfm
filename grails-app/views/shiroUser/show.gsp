@@ -22,6 +22,11 @@
                     <tbody>
 
                         <tr class="prop">
+                            <td valign="top" class="name"><g:message code="shiroUser.realm.label" default="Realm" /></td>
+                            <td valign="top" class="value">${fieldValue(bean: shiroUserInstance, field: "realmId")}</td>
+                        </tr>
+
+                        <tr class="prop">
                             <td valign="top" class="name"><g:message code="shiroUser.firstName.label" default="First Name" /></td>
                             <td valign="top" class="value">${fieldValue(bean: shiroUserInstance, field: "firstName")}</td>
                         </tr>
