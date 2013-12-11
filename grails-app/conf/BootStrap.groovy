@@ -35,8 +35,28 @@ class BootStrap {
         }
 
         // create the category
-        def santeCategory = new Category(name: "santé").save()
-        def medecinCategory = new Category(name: "medecin").save()
+        def santeCategory = new Category()
+        def medecinCategory = new Category()
+/*
+        withLocale(new Locale("fr", "FR")) {
+            santeCategory.setName("santé")
+            medecinCategory.setName("médecin")
+        }
+
+        withLocale(new Locale("en", "US")) {
+            santeCategory.setName("medical")
+            medecinCategory.setName("doctor")
+        }
+*/
+
+        santeCategory.setName_en_US("medical");
+        santeCategory.setName_fr_FR("santé");
+        medecinCategory.setName_en_US("doctor");
+        medecinCategory.setName_fr_FR("médecin");
+
+        santeCategory.save()
+        medecinCategory.save()
+/*
         def pharmacieCategory = new Category(name:  "pharmacie", parent: santeCategory).save()
         def secuCategory = new Category(name:  "sécurité sociale", parent: santeCategory).save()
         def mutuelleCategory = new Category(name:  "mutuelle", parent: santeCategory).save()
@@ -47,8 +67,8 @@ class BootStrap {
                 .addToChilds(secuCategory)
                 .addToChilds(mutuelleCategory)
 
+*/
     }
-
     def destroy = {
     }
 }

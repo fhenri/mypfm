@@ -90,3 +90,6 @@ log4j = {
            'net.sf.ehcache.hibernate'
 }
 
+i18nFields {
+    locales = ['en_US', 'fr_FR']
+}

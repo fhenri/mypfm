@@ -1,7 +1,10 @@
 package org.mypfm.core
 
+import i18nfields.I18nFields
+
+@I18nFields
 class Category {
-    
+
     String name
 
     static belongsTo = [parent: Category]
@@ -11,12 +14,15 @@ class Category {
         name (blank:false, unique:true)
     }
 
+    static i18nFields = ['name']
+
     @Override
     String toString() {
         if (this.parent == null) {
-            this.name
+            name
         } else {
-            "----" + this.name
+            "----" + name
         }
     }
+
 }

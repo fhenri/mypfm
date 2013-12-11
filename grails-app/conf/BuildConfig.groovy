@@ -75,5 +75,6 @@ grails.project.dependency.resolution = {
         compile ":shiro:1.2.0-SNAPSHOT"
         compile ":shiro-ui:1.2.0-SNAPSHOT"
         compile ":mail:1.0.1"
+        compile ":i18n-fields:0.8.1"
     }
 }
