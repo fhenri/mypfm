@@ -32,6 +32,7 @@ class ShiroUser {
     }
 
     static mapping = {
+        autoTimestamp true
         cache true
         roles cache: true
         permissions cache: true

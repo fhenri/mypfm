@@ -97,6 +97,7 @@ class AuthController {
     }
 
     def updatePassword() {
+        render(view:'updatePassword')
     }
 
     def newPassword() {
