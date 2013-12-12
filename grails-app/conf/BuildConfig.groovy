@@ -39,22 +39,16 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
-        mavenRepo "http://snapshots.repository.codehaus.org/"
-        mavenRepo "http://repository.codehaus.org/"
-        mavenRepo "http://download.java.net/maven/2/"
-        mavenRepo "http://repository.jboss.com/maven2/"
-        mavenRepo "http://m2repo.spockframework.org/ext/"
-        mavenRepo "http://m2repo.spockframework.org/snapshots/"
-
     }
 
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
 
-        // runtime 'mysql:mysql-connector-java:5.1.22'
         compile 'org.joda:joda-money:0.9'
         compile 'net.sf.ofx4j:ofx4j:1.6'
         compile 'be.cyberelf.nanoxml:nanoxml:2.2.3'
+
+        runtime 'postgresql:postgresql:8.4-702.jdbc3'
     }
 
     plugins {
@@ -75,5 +69,8 @@ grails.project.dependency.resolution = {
         compile ":shiro:1.2.0-SNAPSHOT"
         compile ":shiro-ui:1.2.0-SNAPSHOT"
         compile ":mail:1.0.1"
+
+        compile ':heroku:1.0.1'
+        compile ':cloud-support:1.0.8'
     }
 }
