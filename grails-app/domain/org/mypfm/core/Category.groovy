@@ -8,7 +8,7 @@ class Category {
     static hasMany = [childs: Category]
 
     static constraints = {
-        name (blank:false, unique:true)
+        name (blank:false, unique:false)
     }
 
     @Override

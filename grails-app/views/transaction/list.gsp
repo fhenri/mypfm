@@ -76,13 +76,13 @@
                                     ${transaction?.category?.name}
                                 </td>
                                 <td>
-                                    <g:textArea cols="12" rows="1" name="comment" value="${transaction?.comment}"/>
+                                    ${transaction?.comment}
                                 </td>
                                 <td>
 
-                                    <a href="#" id="${transaction?.id}" class="btn btn-mini btn-info btn-transactionCategory">
-                                        <i class="halflings-icon edit halflings-icon"></i>
-                                    </a>
+                                <a href="#" id="${transaction?.id}" class="btn btn-mini btn-info btn-transactionCategory">
+                                    <i class="halflings-icon edit halflings-icon"></i>
+                                </a>
                                 %{--
 
                                     <a href="javascript:{}" onclick="document.getElementByName('updateTransaction_${transaction.id}').submit();" class="btn btn-mini btn-info">
@@ -111,7 +111,6 @@
         </div><!-- box -->
     </g:else>
 </div>
-
 
 <div class="modal hide fade" id="transactionCategoryModal">
     <div class="modal-header">
@@ -142,6 +141,5 @@
         </div>
     </g:form>
 </div>
-
 </body>
 </html>

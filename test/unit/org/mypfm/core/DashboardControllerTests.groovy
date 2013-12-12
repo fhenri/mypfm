@@ -1,13 +1,11 @@
 package org.mypfm.core
 
+import grails.test.mixin.Mock
+import grails.test.mixin.TestFor
 
-
-import org.junit.*
-import grails.test.mixin.*
-
-@TestFor(BankController)
+@TestFor(DashboardController)
 @Mock(Bank)
-class BankControllerTests {
+class DashboardControllerTests {
 
     def populateValidParams(params) {
         assert params != null
