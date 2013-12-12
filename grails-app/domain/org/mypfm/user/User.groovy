@@ -22,6 +22,7 @@ class User {
 	}
 
 	static mapping = {
+        table 'PFMUser'
 		password column: '`password`'
 	}
 
