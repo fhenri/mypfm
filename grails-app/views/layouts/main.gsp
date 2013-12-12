@@ -52,34 +52,34 @@
             </a>
             <a class="brand" href="${createLink(uri: '/')}"><span>Personal Finance Manager</span></a>
 
-            <shiro:isLoggedIn>
+            <sec:ifLoggedIn>
                 <div class="nav-no-collapse header-nav">
                     <ul class="nav pull-right">
 
                         <!-- start: User Dropdown -->
                         <li class="dropdown">
                             <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                                <i class="halflings-icon white user"></i> <shiro:principal />
+                                <i class="halflings-icon white user"></i> <sec:username />
                                 <span class="caret"></span>
                             </a>
                         <ul class="dropdown-menu">
-                            <shiro:hasRole name="Administrator">
-                                <li><g:link uri="/shiroUser/list"><i class="halflings-icon white wrench"></i> Manage User</g:link></li>
-                            </shiro:hasRole>
+                            <sec:ifAllGranted roles="ROLE_ADMIN">
+                                <li><g:link uri="/user/list"><i class="halflings-icon white wrench"></i> Manage User</g:link></li>
+                            </sec:ifAllGranted>
                                 <li><g:link uri="/auth/updatePassword"><i class="halflings-icon white wrench"></i>Change Password</g:link></li>
-                                <li><g:link uri="/auth/signOut"><i class="halflings-icon white off"></i>Logout</g:link></li>
+                                <li><g:link uri="/logout"><i class="halflings-icon white off"></i>Logout</g:link></li>
                             </ul>
                         </li>
                         <!-- end: User Dropdown -->
                     </ul>
                 </div>
-            </shiro:isLoggedIn>
+            </sec:ifLoggedIn>
         </div>
     </div>
 </div>
 
 <section id="main">
-    <shiro:isLoggedIn>
+    <sec:ifLoggedIn>
         <div class="container-fluid">
             <div class="row-fluid">
 
@@ -117,10 +117,10 @@
                 </div>
             </div>
         </div>
-    </shiro:isLoggedIn>
-    <shiro:isNotLoggedIn>
+    </sec:ifLoggedIn>
+    <sec:ifNotLoggedIn>
         <g:layoutBody/>
-    </shiro:isNotLoggedIn>
+    </sec:ifNotLoggedIn>
 
 </section>
 

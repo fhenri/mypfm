@@ -16,12 +16,14 @@
 					<div class="fieldcontain">
 						Please update your password here :<br/><br/>
 					</div>
+                    %{--
 					<div class="fieldcontain required">
 						<label for="oldpassword">
 							<g:message code="shiroUser.oldpassword.label" default="Old Password" />
 						</label>
 						<g:passwordField name="oldpassword" required=""/>
 					</div>
+					--}%
 					<div class="fieldcontain required">
 						<label for="password1">
 							<g:message code="shiroUser.password1.label" default="New Password" />

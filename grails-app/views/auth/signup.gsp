@@ -35,24 +35,6 @@
                     </div>
                     <div class="clearfix"></div>
 
-                    <div class="input-prepend" title="Email">
-                        <span class="add-on"><i class="halflings-icon user"></i></span>
-                        <input class="input-large span10" name="email" id="email" type="text" placeholder="type email" value="${email}"/>
-                    </div>
-                    <div class="clearfix"></div>
-
-                    <div class="input-prepend" title="Firstname">
-                        <span class="add-on"><i class="halflings-icon user"></i></span>
-                        <input class="input-large span10" name="firstname" id="firstname" type="text" placeholder="type your first name" value="${firstname}"/>
-                    </div>
-                    <div class="clearfix"></div>
-
-                    <div class="input-prepend" title="Lastname">
-                        <span class="add-on"><i class="halflings-icon user"></i></span>
-                        <input class="input-large span10" name="lastname" id="lastname" type="text" placeholder="type your last name" value="${lastname}"/>
-                    </div>
-                    <div class="clearfix"></div>
-
                     <div class="input-prepend" title="Password">
                         <span class="add-on"><i class="halflings-icon lock"></i></span>
                         <input class="input-large span10" name="password" id="password" type="password" placeholder="type password"/>

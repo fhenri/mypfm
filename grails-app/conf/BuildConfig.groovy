@@ -34,6 +34,7 @@ grails.project.dependency.resolution = {
         mavenLocal()
         mavenCentral()
 
+        mavenRepo 'http://repo.spring.io/milestone'
         // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
         //mavenRepo "http://snapshots.repository.codehaus.org"
         //mavenRepo "http://repository.codehaus.org"
@@ -53,7 +54,7 @@ grails.project.dependency.resolution = {
 
     plugins {
         runtime ":hibernate:$grailsVersion"
-        runtime ":jquery:1.8.3"
+        runtime ":jquery:1.10.2"
         runtime ":resources:1.2"
 
         // Uncomment these (or add new ones) to enable additional resources capabilities
@@ -66,13 +67,10 @@ grails.project.dependency.resolution = {
         runtime ":database-migration:1.3.2"
 
         compile ':cache:1.0.1'
-        compile ":shiro:1.2.0"
-        compile ":shiro-ui:1.2.0-SNAPSHOT"
         compile ":mail:1.0.1"
+        compile ':spring-security-core:2.0-RC2'
 
-        compile(':heroku:1.0.1') {
-            exclude 'database-session'
-        }
+        compile ':heroku:1.0.1'
         compile ':cloud-support:1.0.8'
     }
 }

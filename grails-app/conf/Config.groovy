@@ -90,3 +90,30 @@ log4j = {
            'net.sf.ehcache.hibernate'
 }
 
+
+
+// Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.logout.postOnly = false
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'org.mypfm.user.User'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'org.mypfm.user.UserRole'
+grails.plugin.springsecurity.authority.className = 'org.mypfm.user.Role'
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	'/':                              ['permitAll'],
+	'/index':                         ['permitAll'],
+	'/index.gsp':                     ['permitAll'],
+	'/**/js/**':                      ['permitAll'],
+	'/**/css/**':                     ['permitAll'],
+	'/**/images/**':                  ['permitAll'],
+	'/**/favicon.ico':                ['permitAll'],
+    '/auth/signup':                   ['permitAll'],
+    '/auth/register':                 ['permitAll'],
+    '/auth/updatePassword':           ['ROLE_USER'],
+    '/auth/doUpdatePassword':         ['ROLE_USER'],
+    '/dashboard':                     ['ROLE_USER'],
+    '/dashboard/**':                  ['ROLE_USER'],
+    '/transaction':                   ['ROLE_USER'],
+    '/transaction/**':                ['ROLE_USER'],
+    '/user':                          ['ROLE_ADMIN'],
+    '/user/**':                       ['ROLE_ADMIN'],
+]
+

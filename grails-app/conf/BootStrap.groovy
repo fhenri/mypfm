@@ -1,37 +1,26 @@
-import org.apache.shiro.crypto.hash.Sha512Hash
 import org.mypfm.core.Category
-import org.mypfm.user.ShiroUser
-import org.mypfm.user.ShiroRole
+import org.mypfm.user.Role
+import org.mypfm.user.User
+import org.mypfm.user.UserRole
 
 import static java.util.UUID.randomUUID
 
 class BootStrap {
 
-    def shiroSecurityService
+    def springSecurityService
 
     def init = { servletContext ->
-        //This code is only for demo purposes
-        def adminRole = ShiroRole.findByName("Administrator")
-        if(!adminRole) {
-            adminRole = new ShiroRole(name: 'Administrator')
-            adminRole.save(failOnError:true)
-        }
-        def userRole = ShiroRole.findByName("User")
-        if(!userRole){
-            userRole = new ShiroRole(name: 'User')
-            userRole.save(failOnError:true)
-        }
-        def admin = ShiroUser.findByUsername('admin')
-        if(!admin){
-            def hash = new Sha512Hash("changeit").toHex()
-            admin = new ShiroUser(firstName:"Administator", lastName:"User",
-                    username: 'admin', email:"me@the.internet")
+
+        if(!User.count()) {
+            def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true)
+            def userRole = new Role(authority: 'ROLE_USER').save(flush: true)
+
+            def admin = new User(username: 'admin', password: 'changeit')
             admin.realmId = randomUUID() as String
-            admin.passwordHash = hash
-            admin.save(failOnError:true)
-            adminRole.addToUsers(admin)
-            adminRole.save(failOnError:true)
-            admin.addToPermissions("*:*")
+            admin.save(flush: true)
+
+            UserRole.create admin, adminRole, true
+            UserRole.create admin, userRole, true
         }
 
         // create the category

@@ -1,7 +1,5 @@
 package org.mypfm.core
 
-import org.apache.shiro.SecurityUtils
-import org.mypfm.user.ShiroUser
 import org.springframework.dao.DataIntegrityViolationException
 
 /**
@@ -10,12 +8,13 @@ import org.springframework.dao.DataIntegrityViolationException
  */
 class DashboardController {
 
-    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
+    def springSecurityService
 
+    static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
     static defaultAction = 'list'
 
     def list(Integer max) {
-        def realmId = ShiroUser.findByUsername( SecurityUtils.subject.principal ).realmId
+        def realmId = springSecurityService.currentUser.realmId
         def query = {
             like("realmId", realmId)
         }

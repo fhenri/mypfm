@@ -1,27 +1,26 @@
 package org.mypfm.core
 
-import org.apache.shiro.SecurityUtils
-import org.mypfm.user.ShiroUser
-
 /**
  *
  * @author fhenri
  */
 class TransactionController {
 
+    def springSecurityService
+
     static allowedMethods = [update: "POST"]
-    
     static defaultAction = 'list'
 
     def list(Integer max) {
         //params.max = Math.min(max ?: 30, 100)
-        def realmId = ShiroUser.findByUsername( SecurityUtils.subject.principal ).realmId
+        def realmId = springSecurityService.currentUser.realmId
         //[transactionList: Transaction.list(params), transactionTotal: Transaction.count()]
 
         def query = {
             like("realmId", realmId)
         }
         [transactionList: Transaction.createCriteria().list(query), transactionTotal: Transaction.createCriteria().count(query)]
+
     }
     
     def transactionService
@@ -33,7 +32,7 @@ class TransactionController {
         } 
         // only support ofx file for now
         else if (sourceFile.originalFilename.endsWith("ofx")) {
-            String realmId = ShiroUser.findByUsername( SecurityUtils.subject.principal ).realmId
+            def realmId = springSecurityService.currentUser.realmId
             def countTransaction = transactionService.importOFXStatement(sourceFile, realmId)
             flash.message = 'ofx File imported successfully: ' + countTransaction + ' transaction(s) loaded'
         }  else {
