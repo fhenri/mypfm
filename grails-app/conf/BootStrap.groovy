@@ -37,6 +37,13 @@ class BootStrap {
         // create the category
         def santeCategory = new Category()
         def medecinCategory = new Category()
+
+        santeCategory.setName("santé", new Locale("fr", "FR"))
+        medecinCategory.setName("médecin", new Locale("fr", "FR"))
+
+        santeCategory.setName("medical", new Locale("en", "US"))
+        medecinCategory.setName("doctor", new Locale("en", "US"))
+
 /*
         withLocale(new Locale("fr", "FR")) {
             santeCategory.setName("santé")
@@ -47,7 +54,7 @@ class BootStrap {
             santeCategory.setName("medical")
             medecinCategory.setName("doctor")
         }
-*/
+/*
 
         santeCategory.setName_en_US("medical");
         santeCategory.setName_fr_FR("santé");
