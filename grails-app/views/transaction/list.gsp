@@ -79,7 +79,7 @@
                                         <g:select id="category" name="category.id" from="${org.mypfm.core.Category.list()}" optionKey="id" value="${transaction?.category?.id}" class="many-to-one" noSelection="['null': '']"/>
                                     </td>
                                     <td>
-                                        <g:textArea cols="12" rows="4" name="comment" value="${transaction?.comment}"/>
+                                        <g:textArea cols="12" rows="2" name="comment" value="${transaction?.comment}"/>
                                     </td>
                                     <td>
 

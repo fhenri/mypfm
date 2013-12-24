@@ -13,7 +13,7 @@ class TransactionController {
 
     def list(Integer max) {
 
-        params.max = Math.min(params.max ? params.int('max') : 20, 100)
+        params.max = Math.min(params.max ? params.int('max') : 15, 100)
         def realmId = springSecurityService.currentUser.realmId
 
         def query
