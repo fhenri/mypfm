@@ -21,7 +21,7 @@ class UserController {
 
     def save() {
         def userInstance = new User(params)
-        if (!userInstance.save(flush: true)) {
+        if (!userInstance.save()) {
             render(view: "create", model: [userInstance: userInstance])
             return
         }
@@ -72,7 +72,7 @@ class UserController {
 
         userInstance.properties = params
 
-        if (!userInstance.save(flush: true)) {
+        if (!userInstance.save()) {
             render(view: "edit", model: [userInstance: userInstance])
             return
         }
@@ -90,7 +90,7 @@ class UserController {
         }
 
         try {
-            userInstance.delete(flush: true)
+            userInstance.delete()
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'user.label', default: 'User'), id])
             redirect(action: "list")
         }

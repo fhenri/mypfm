@@ -29,7 +29,7 @@ class DashboardController {
 
     def saveBank() {
         def bankInstance = new Bank(params)
-        if (!bankInstance.save(flush: true)) {
+        if (!bankInstance.save()) {
             render(view: "createBank", model: [bankInstance: bankInstance])
             return
         }
@@ -90,7 +90,7 @@ class DashboardController {
 
         bankInstance.properties = params
 
-        if (!bankInstance.save(flush: true)) {
+        if (!bankInstance.save()) {
             render(view: "edit", model: [bankInstance: bankInstance])
             return
         }
@@ -119,7 +119,7 @@ class DashboardController {
 
         accountInstance.properties = params
 
-        if (!accountInstance.save(flush: true)) {
+        if (!accountInstance.save()) {
             render(view: "editAccount", model: [bankInstance: accountInstance])
             return
         }
@@ -137,7 +137,7 @@ class DashboardController {
         }
 
         try {
-            bankInstance.delete(flush: true)
+            bankInstance.delete()
             flash.message = message(code: 'default.deleted.message', args: [message(code: 'bank.label', default: 'Bank'), id])
             redirect(action: "list")
         }

@@ -52,7 +52,7 @@ class TransactionService {
                             accountInstance = anAccount
                             existingAccount = true
                         }
-                        accountInstance.save(flush: true)
+                        accountInstance.save()
                         break
                     case "ACCTTYPE" :
                         accountInstance?.type = value
@@ -103,7 +103,7 @@ class TransactionService {
                 switch (aggregateName) {
                     case "STMTRS" :
                         isInAccount = false
-                        accountInstance.save(flush: true)
+                        accountInstance.save()
                         break
                     case "STMTTRN" :
                         isInTransaction = false

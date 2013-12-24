@@ -12,12 +12,12 @@ class BootStrap {
     def init = { servletContext ->
 
         if(!User.count()) {
-            def adminRole = new Role(authority: 'ROLE_ADMIN').save(flush: true)
-            def userRole = new Role(authority: 'ROLE_USER').save(flush: true)
+            def adminRole = new Role(authority: 'ROLE_ADMIN').save()
+            def userRole = new Role(authority: 'ROLE_USER').save()
 
             def admin = new User(username: 'admin', password: 'changeit')
             admin.realmId = randomUUID() as String
-            admin.save(flush: true)
+            admin.save()
 
             UserRole.create admin, adminRole, true
             UserRole.create admin, userRole, true
