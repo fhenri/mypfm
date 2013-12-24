@@ -45,73 +45,77 @@
                 </div>
             </div>
             <div class="box-content">
-                <table class="table table-striped table-bordered table-condensed bootstrap-datatable datatable">
+                <table class="table table-striped table-bordered table-condensed">
                     <thead>
                         <tr>
-                            <g:sortableColumn property="id" title="${message(code: 'transaction.account')}" class="id header"/>
-                            <g:sortableColumn property="id" title="${message(code: 'transaction.label')}" class="id header"/>
-                            <g:sortableColumn property="id" title="${message(code: 'transaction.date')}" class="id header"/>
-                            <g:sortableColumn property="id" title="${message(code: 'transaction.amount')}" class="id header"/>
-                            <g:sortableColumn property="id" title="${message(code: 'transaction.category')}" class="id header"/>
+                            <g:sortableColumn property="account" title="${message(code: 'transaction.account')}" class="id header"/>
+                            <g:sortableColumn property="label" title="${message(code: 'transaction.label')}" class="id header"/>
+                            <g:sortableColumn property="date" title="${message(code: 'transaction.date')}" class="id header"/>
+                            <g:sortableColumn property="amount" title="${message(code: 'transaction.amount')}" class="id header"/>
+                            <g:sortableColumn property="category.id" title="${message(code: 'transaction.category')}" class="id header"/>
                             <th>${message(code: 'transaction.comment')}</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <g:each in="${transactionList}" var="transaction">
-                            <tr>
-                                <td>
-                                    ${transaction.account}
-                                </td>
-                                <td>
-                                    ${transaction.label}
-                                </td>
-                                <td>
-                                    ${transaction.date.format('dd/MM/yyyy')}
-                                </td>
-                                <td>
-                                    ${transaction.amount?.getAmount()}
-                                </td>
-                                <td>
-                                    ${transaction?.category?.name}
-                                </td>
-                                <td>
-                                    ${transaction?.comment}
-                                </td>
-                                <td>
+                            <g:form action="update" method="post">
+                                <g:hiddenField name="id" value="${transaction?.id}" />
+                                <g:hiddenField name="version" value="${transaction?.version}" />
+                                <tr>
+                                    <td>
+                                        ${transaction.account}
+                                    </td>
+                                    <td>
+                                        ${transaction.label}
+                                    </td>
+                                    <td>
+                                        ${transaction.date.format('dd/MM/yyyy')}
+                                    </td>
+                                    <td>
+                                        ${transaction.amount?.getAmount()}
+                                    </td>
+                                    <td>
+                                        <g:select id="category" name="category.id" from="${org.mypfm.core.Category.list()}" optionKey="id" value="${transaction?.category?.id}" class="many-to-one" noSelection="['null': '']"/>
+                                    </td>
+                                    <td>
+                                        <g:textArea cols="12" rows="4" name="comment" value="${transaction?.comment}"/>
+                                    </td>
+                                    <td>
 
-                                <a href="#" id="${transaction?.id}" class="btn btn-mini btn-info btn-transactionCategory">
-                                    <i class="halflings-icon edit halflings-icon"></i>
-                                </a>
-                                %{--
-
-                                    <a href="javascript:{}" onclick="document.getElementByName('updateTransaction_${transaction.id}').submit();" class="btn btn-mini btn-info">
+                                    <g:submitButton name="update" class="btn btn-mini btn-info"
+                                                    value="${message(code: 'default.button.update.label', default: 'Update')}" />
+                                    %{--
+                                    <a href="#" id="${transaction?.id}" class="btn btn-mini btn-info btn-transactionCategory">
                                         <i class="halflings-icon edit halflings-icon"></i>
                                     </a>
-                                    <g:hiddenField name="id" value="${transaction?.id}"/>
-                                    <g:hiddenField name="version" value="${transaction?.version}"/>
-                                    <g:actionSubmit class="btn btn-mini btn-info" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
 
-                                    <g:link action="show" id="${transaction.id}" class="btn btn-mini btn-info">
-                                        <i class="halflings-icon edit halflings-icon"></i>
-                                    </g:link>
-                                --}%
-                                </td>
-                            </tr>
+                                        <a href="javascript:{}" onclick="document.getElementByName('updateTransaction_${transaction.id}').submit();" class="btn btn-mini btn-info">
+                                            <i class="halflings-icon edit halflings-icon"></i>
+                                        </a>
+                                        <g:hiddenField name="id" value="${transaction?.id}"/>
+                                        <g:hiddenField name="version" value="${transaction?.version}"/>
+                                        <g:actionSubmit class="btn btn-mini btn-info" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+
+                                        <g:link action="show" id="${transaction.id}" class="btn btn-mini btn-info">
+                                            <i class="halflings-icon edit halflings-icon"></i>
+                                        </g:link>
+                                    --}%
+                                    </td>
+                                </tr>
+                            </g:form>
                         </g:each>
                     </tbody>
                 </table>
             </div>
             <!-- keep pager -->
-            <!--
             <div id="pagination" class="pagination pagination-right">
-                <g:paginate total="${transactionTotal}"/>
+                <g:paginate controller="Transaction" action="list" total="${transactionTotal}"/>
             </div>
-            -->
         </div><!-- box -->
     </g:else>
 </div>
-
+<!--
 <div class="modal hide fade" id="transactionCategoryModal">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">×</button>
@@ -141,5 +145,6 @@
         </div>
     </g:form>
 </div>
+-->
 </body>
 </html>

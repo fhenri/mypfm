@@ -8,18 +8,27 @@ class TransactionController {
 
     def springSecurityService
 
-    static allowedMethods = [update: "POST"]
+    static allowedMethods = [upload: "POST"]
     static defaultAction = 'list'
 
     def list(Integer max) {
-        //params.max = Math.min(max ?: 30, 100)
-        def realmId = springSecurityService.currentUser.realmId
-        //[transactionList: Transaction.list(params), transactionTotal: Transaction.count()]
 
-        def query = {
-            like("realmId", realmId)
+        params.max = Math.min(params.max ? params.int('max') : 20, 100)
+        def realmId = springSecurityService.currentUser.realmId
+
+        def query
+        if (params.sort) {
+            query = {
+                like("realmId", realmId)
+                order(params.sort, params.order)
+            }
+        } else {
+            query = {
+                like("realmId", realmId)
+            }
         }
-        [transactionList: Transaction.createCriteria().list(query), transactionTotal: Transaction.createCriteria().count(query)]
+        def results = Transaction.createCriteria().list(query, max: params.max, offset: params.offset)
+        [transactionList: results, transactionTotal: results.totalCount]
 
     }
     
@@ -73,7 +82,7 @@ class TransactionController {
 
         transactionInstance.properties = params
 
-        if (!transactionInstance.save(flush: true)) {
+        if (!transactionInstance.save()) {
             flash.message = message(code: 'default.updated.message', args: [message(code: 'transaction.label', default: 'Transaction'), transactionInstance.id])
             redirect(action: "list")
             return
