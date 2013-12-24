@@ -5,7 +5,6 @@ import net.sf.ofx4j.io.nanoxml.NanoXMLOFXReader
 import org.joda.money.Money
 
 import java.text.SimpleDateFormat
-
 /**
  *
  * @author fhenri
@@ -19,11 +18,6 @@ class TransactionService {
      */
     def importOFXStatement(uploadFile, realmId) {
 
-        // backup file so we can treat it
-        def saveFile = new java.io.File("/tmp/${uploadFile.originalFilename}")
-        uploadFile.transferTo(saveFile)
-
-        def reader = new NanoXMLOFXReader()
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd")
 
         int countTransaction = 0
@@ -118,8 +112,9 @@ class TransactionService {
             }
         }
 
+        def reader = new NanoXMLOFXReader()
         reader.setContentHandler(ofxHandler)
-        reader.parse(new FileInputStream(saveFile))
+        reader.parse(uploadFile.inputStream)
 
         countTransaction
     }
