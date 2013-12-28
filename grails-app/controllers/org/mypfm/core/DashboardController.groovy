@@ -24,11 +24,16 @@ class DashboardController {
     }
 
     def createBank() {
-        [bankInstance: new Bank(params)]
+        def realmId = springSecurityService.currentUser.realmId
+        def bankInstance = new Bank(params)
+        bankInstance.realmId = realmId
+        [bankInstance: bankInstance]
     }
 
     def saveBank() {
+        def realmId = springSecurityService.currentUser.realmId
         def bankInstance = new Bank(params)
+        bankInstance.realmId = realmId
         if (!bankInstance.save()) {
             render(view: "createBank", model: [bankInstance: bankInstance])
             return
